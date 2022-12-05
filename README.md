@@ -1,24 +1,5 @@
 # SpeakerPool
-Remote speech data collection with Flask
+SpeakerPool is a platform for remote speech data collection. It uses the Flask microapplication framework which is written in Python and runs in a web browser.
 
-# Setup
-git clone https://github.com/tschnoor/SpeakerPool.git
-
-cd speakerpool
-
-create the virtual environment
-
-activate the virtual environment
-
-pip install -r requirements.txt
-
-sudo apt-get install libsndfile1-dev
-
-to run:
-  
-sudo SCRIPT_NAME=/speakerpool ./sp-env/bin/gunicorn -c gunicorn.conf.py -b 127.0.0.1:5003 run:app
-
-
-*Had to implement the temporary solution for setting the SCRIPT_NAME (URL prefix) described in this issue: https://github.com/benoitc/gunicorn/issues/679
-
-
+### Update
+I am currently presenting SpeakerPool at the 183rd meeting of the Acoustical Society of America in Nashville. Documentation is still being written, but SpeakerPool will soon be available for use. Follow this repository to stay tuned!
