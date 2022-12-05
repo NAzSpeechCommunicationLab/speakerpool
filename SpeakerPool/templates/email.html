@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="content-section" style="text-align: center;">
+    <form method="POST" action="">
+        {{form.hidden_tag()}}
+        <legend class="border-bottom mb-4" id="signin2">
+            Email
+        </legend>
+        <p id="email_message">Giving your email address is optional. You only need to enter your email address if you would like to enter into the raffle. Your email address will not be used for any purpose other than contacting you if you win the raffle.</p>
+        <div class="form-group">
+            {{form.email.label(class="form-control-label", id="emailLabel")}}
+            {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+
+                    <span id="email_error">{{ error }}</span>
+
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{form.email(class="form-control form-control-lg")}}
+            {% endif %}
+        </div>
+        <div class="form-group" style="margin-top: 15px;">
+            {{form.submit(class="btn btn-primary", style="color:white; background-color:var(--color4)", id="submit")}}
+        </div>
+    </form>
+    <a href={{url_for("demographic", study_id=study_id, lang=lang)}} id="skip">Skip</a>
+</div>
+
+<script>
+    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+    .then (function (json){
+        document.getElementById("emailLabel").innerHTML = json.email.{{lang}}
+        document.getElementById("submit").value = json.submit.{{lang}}
+        document.getElementById("skip").innerHTML = json.skip.{{lang}}
+        document.getElementById("email_message").innerHTML = json.emailMessage.{{lang}}
+    })
+    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+    .then (function (json){
+        document.getElementById("emailLabel").innerHTML = json.email.{{lang}}
+        document.getElementById("submit").value = json.submit.{{lang}}
+    if (document.getElementById("email_error").innerHTML == "email error") {
+            document.getElementById("email_error").innerHTML = json.emailInvalid.{{lang}}
+        }
+    })
+</script>
+
+{% endblock content %}

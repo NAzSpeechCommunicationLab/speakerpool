@@ -1,0 +1,278 @@
+{
+    "about": {
+        "eng": "About",
+        "mal": "Mombamomba"
+    },
+    "recognition": {
+        "eng": "Recognition",
+        "mal": "Fankatoavana"
+    },
+    "signin": {
+        "eng": "Sign In",
+        "mal": "Miditra"
+    },
+    "account": {
+        "eng": "Account",
+        "mal": "Kaonty"
+    },
+    "studies": {
+        "eng": "Studies",
+        "mal": "Ireo Fikarohana"
+    },
+    "prompttype": {
+        "eng": "Prompt Type:",
+        "mal": "Sokajim-pamakiana:"
+    },
+    "signinto": {
+        "eng": "Sign in to see your progress here.",
+        "mal": "Midira mba ahitanao ny fivoaranao eto."
+    },
+    "yourprogress": {
+        "eng": "Your Progress:",
+        "mal": "Ny fivoaranao:"
+    },
+    "numberofprompts": {
+        "eng": "Number of prompts recorded or skipped:",
+        "mal": "Ny isan'ny famakiana voaray sy nialana:"
+    },
+    "stillavailable": {
+        "eng": "Number of prompts still available to record:",
+        "mal": "Isan'ny ireo sombin-dahatsoratra mbola afaka raiketina am-peo:"
+    },
+    "notyet": {
+        "eng": "You have not yet participated in this study.",
+        "mal": "Mbola tsy nandray anjara tamin'ity fikarohana ity ianao."
+    },
+    "welldone": {
+        "eng": "Well done! You've completed all prompts for this study. Thank you for your participation.",
+        "mal": "Arahabaina! Tontosanao soamatsara ny famakiana rehetra ho an'ity fikarohana ity."
+    },
+    "studystats": {
+        "eng": "Study statistics:",
+        "mal": "Ireo statistikan'ny fikarohana:"
+    },
+    "numparticipants": {
+        "eng": "Number of participants:",
+        "mal": "Isan'ireo mpandray anjara:"
+    },
+    "totaln": {
+        "eng": "Total number of recordings:",
+        "mal": "Isa fitambaran'ireo fandraisam-peo:"
+    },
+    "totallength": {
+        "eng": "Total audio length (hours):",
+        "mal": "Halavan'ny horonam-peo mitambatra:"
+    },
+    "questions": {
+        "eng": "Questions which will be asked in the demographic survey of the study:",
+        "mal": "Fanontaniana mety hipetraka momban'ny fanadihadihana demografika ho an'ny fikarohana:"
+    },
+    "participate": {
+        "eng": "Participate",
+        "mal": "Mandray anjara"
+    },
+    "noaccount": {
+        "eng": "Don’t have an account yet?",
+        "mal": "Mbola tsy manana kaonty ve?"
+    },
+    "createaccount": {
+        "eng": "Create Account",
+        "mal": "Manokatra kaonty"
+    },
+    "username": {
+        "eng": "Username",
+        "mal": "Famantarana ny mpampiasa"
+    },
+    "password": {
+        "eng": "Password",
+        "mal": "Teny miafina"
+    },
+    "remember": {
+        "eng": "Remember Me",
+        "mal": "Tsarovy aho"
+    },
+    "forgetpassword": {
+        "eng": "Please write down your username and password in a secure place.",
+        "mal": "Sorato amin'ny toerana azo antoka ny famantarana ny mpampiasa ny kaonty sy ny teny miafina."
+    },
+    "noway": {
+        "eng": " If you forget your username or password, there will be no way to recover your account.",
+        "mal": " Raha toa ka nanadinony famatarana ny mpampiasa ny kaonty na ny teny miafina ianao dia tsy misy fomba ahafahana mamerina ilay kaontinao indray."
+    },
+    "alreadyhave": {
+        "eng": "Already have an account?",
+        "mal": "Efa manana kaonty ve?"
+    },
+    "confirmpassword": {
+        "eng": "Confirm password",
+        "mal": "Manamarina ny teny miafina"
+    },
+    "submit": {
+        "eng": "Submit",
+        "mal": "Mandefa"
+    },
+    "accountdash": {
+        "eng": "Account Dashboard",
+        "mal": "Solaitran'ny fijerevana an-kapoben'ny kaonty"
+    },
+    "signout": {
+        "eng": "Sign Out",
+        "mal": "Mivoaka"
+    },
+    "consent": {
+        "eng": "Consent Form",
+        "mal": "Antontantaratasy fenoina ho fanekena"
+    },
+    "agree": {
+        "eng": "I Agree",
+        "mal": "Manaiky Aho"
+    },
+    "mobileconsentmessage": {
+        "eng": "Your browser does not support viewing the PDF on this page. Please click the link below to download the consent form. After reading the consent form, come back to this page and you will be able to proceed.",
+        "mal": "Tsy zakan'ny mpitety ny manokatra PDF amin'ity pejy ity. Sokafy ny rohy etsy ambany mba ahafahanao misintona ny taratasy fenoina ho fanekena, miverena eto amin'ny ity pejy ity ary ho afaka hanomboka ianao."
+    },
+    "formdownload": {
+        "eng": "Download the Consent Form",
+        "mal": "Sintomy avy eto ny taratasy fenoina ho fanekena"
+    },
+    "email": {
+        "eng": "Email",
+        "mal": "Email"
+    },
+    "emailLength": {
+        "eng": "Must be 5-320 characters long.",
+        "mal": "Eo amin'ny teny 5-320 ihany no halavany."
+    },
+    "emailInvalid": {
+        "eng": "Please enter a valid Email address.",
+        "mal": "Ampidiro Email manan-kery."
+    },
+    "emailMessage": {
+        "eng": "Giving your email address is optional. You only need to enter your email address if you would like to enter into the raffle. Your email address will not be used for any purpose other than contacting you if you win the raffle.",
+        "mal": "Tsy voatery omena ny adiresy mailakao. Mila miditra amin'ny adiresy mailaka ihany ianao raha te hiditra anisan'ny hosarihana hahazoana karatra fanomezana Visa Prepaid mitentina 25 CAD. Ny adiresy mailakao dia tsy ampiasaina amin'ny tanjona hafa afa-tsy ny hifandraisana aminao raha mandresy ilay karatra fanomezana ianao."
+    },
+    "demosurvey": {
+        "eng": "Demographic Survey",
+        "mal": "Fabadihadihana demografika"
+    },
+    "recordinginstructions": {
+        "eng": "Recording Instructions",
+        "mal": "Torolalana ho an'ny fandraisam-peo"
+    },
+    "instructions1": {
+        "eng": "A text prompt will appear automatically once you press the button to proceed.",
+        "mal": "Miseho ho azy ny sombin-dahatsotra rehefa manindry ny bokitra manomboka ianao."
+    },
+    "instructions2": {
+        "eng": "When you press this button, the recording will begin. ",
+        "mal": "Rehefa manindry ity bokitra ity ianao dia mitohy indray ny fandraisam-peo."
+    },
+    "instructions3": {
+        "eng": "In order to stop the recording, press this button.",
+        "mal": "Mba ahafahana manatsahatra ny fandraisam-peo, tsindrio ity bokitra ity."
+    },
+    "instructions41": {
+        "eng": "Once you stop the recording, you can play back what you have recorded using the audio toolbar. If you would like to re-record, you may do so with this button.",
+        "mal": "Rehefa mahavita ny fandraisam-peo ianao dia afaka mihaino izay noraisina am-peo amin'ny alalan'ny fampiasana ny efitra kelin'ny fihainoana feo eto. Raha toa ka hamerina handray feo indray ianao dia afaka ny manao izany amin'ny fampiasana ity bokitra ity."
+    },
+    "instructions42": {
+        "eng": "Once you are satisfied with the recording, you can submit it by pressing this button.",
+        "mal": "Rehefa afa-po amin'ny fandraisam-peo ianao dia afakany mandefa izany amin'ny fanindriana ity bokitra ity."
+    },
+    "instructions43": {
+        "eng": "The recording will be uploaded to the server and the prompt will change automatically.",
+        "mal": "Voaray soamatsara anaty lohamilina ny fandraisam-peonao ary miova ho azy manaraka izany ny angona."
+    },
+    "instructions5": {
+        "eng": "If at any time a text prompt makes you uncomfortable, you don't know how to pronounce a word, or you don't want to record the prompt for any other reason, you may skip the prompt with this button.",
+        "mal": "Raha toa ka misy manelingelina anao amin'ireo sombin-dahatsotra, mety tsy ho hainao ny manonona teny iray, na koa tsy tianao horaisina am-peo ny sombin-dahatsoratra noho ny antony manokana, dia afaka miala amin'ny torolalana ianao amin'ny fanindriana ity bokitra ity."
+    },
+    "instructions6": {
+        "eng": "You may stop recording or take a break at any time.",
+        "mal": "Afaka manatsahatra ny fandraisam-peo na miato kely ianao amin'ny fotoana rehetra."
+    },
+    "proceedtorecordings": {
+        "eng": "Proceed to Recordings",
+        "mal": "Manomboka ireo fandraisam-peo"
+    },
+    "start": {
+        "eng": "Start",
+        "mal": "Manomboka"
+    },
+    "record": {
+        "eng": "Record Audio",
+        "mal": "Faindraisam-peo"
+    },
+    "stop": {
+        "eng": "Stop Recording",
+        "mal": "Ahatsatra ny fandraisam-peo"
+    },
+    "skip": {
+        "eng": "Skip",
+        "mal": "Mandingana"
+    },
+    "rerecord": {
+        "eng": "Re-Record",
+        "mal": "Mamerina fandraisam-peo"
+    },
+    "successfulupload": {
+        "eng": "Recording uploaded successfully.",
+        "mal": "Voaray soamatsara ny fandraisam-peo."
+    },
+    "successfulskip": {
+        "eng": "Prompt skipped successfully.",
+        "mal": "Tafiala soamatsara anatin'ny toromarika."
+    },
+    "thankyou": {
+        "eng": "Thank you for your participation!",
+        "mal": "Mankasitraka amin'ny fandraisanao anjara!"
+    },
+    "done": {
+        "eng": "You have completed all prompts for this study.",
+        "mal": "Tanterakao soamatsara ny toromarika rehetra ho an'ny ity fikatohana ity."
+    },
+    "returnhome": {
+        "eng": "Return Home",
+        "mal": "Miverina eo amin'ny fandraisana"
+    },
+    "requiredresponse": {
+        "eng": "This response is required.",
+        "mal": "Takiana ny valin-teny eto."
+    },
+    "number": {
+        "eng": "Please answer this question with a number.",
+        "mal": "Valio amin'ny alalan'ny tarehimarika ity fanontaniana ity."
+    },
+    "usernametaken": {
+        "eng": "That username is taken. Please choose a different one.",
+        "mal": "Efa misy mampiasa ity famatarana ny mpampiasa ity. Misafidiana iray hafa azafady."
+    },
+    "length": {
+        "eng": "Must be 4-20 characters long.",
+        "mal": "Eo amin'ny teny 4-20 ihany no halavany."
+    },
+    "match": {
+        "eng": "The passwords must match.",
+        "mal": "Tokony hifanaraka ny teny miafina."
+    },
+    "spaces": {
+        "eng": "You may not use spaces in your username.",
+        "mal": "Tsy tokony hampiasa elanelana ianao amin'ny famantarana ny mpampiasa."
+    },
+    "welcome": {
+        "eng": "Welcome",
+        "mal": "Tongasoa"
+    },
+    "signedout": {
+        "eng": "You have been signed out.",
+        "mal": "Efa tafavoaka ianao."
+    },
+    "successfulsignin": {
+        "eng": "Account created successfully. Please sign in.",
+        "mal": "Voasokatra soamatsara ny kaonty. Midira azafady."
+    },
+    "invalidlogin": {
+        "eng": "Invalid login credentials",
+        "mal": "Fanamarinana tsy manan-kery"
+    }
+}

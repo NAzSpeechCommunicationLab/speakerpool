@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="instructions">
+    <h3 id="recordinginstructions">Recording Instructions</h3>
+    <p id="instructions1">A text prompt will appear automatically once you press the button to proceed.</p>
+    <p><span id="instructions2">When you press the <button class="btn btn-primary" style="background-color: red;">Start Recording</button> button, the recording will begin.</span><button class="btn btn-primary" style="background-color: red;" id="record">Start Recording</button></p>
+    <p><span id="instructions3">In order to stop the recording, press the <button class="btn btn-primary" style="background-color: red;">Stop Recording</button> button.</span><button class="btn btn-primary" style="background-color: red;" id="stop">Stop Recording</button></p>
+    <p><span id="instructions41">Once you stop the recording, you can play back what you have recorded using the audio toolbar. If you would like to re-record, you may do so with the <button class="btn btn-primary" style="background-color: red;">Re-Record</button> button.</span><button class="btn btn-primary" style="background-color: red;" id="rerecord">Re-Record</button></p>
+    <p><span id="instructions42"> Once you are satisfied with the recording, you can submit it by pressing the <button class="btn btn-primary" style="background-color: green;">Submit</button> button.</span><button class="btn btn-primary" style="background-color: green;" id="submit">Submit</button></p>
+    <p id="instructions43">The recording will be uploaded to the server and the prompt will change automatically.</p>
+    <p><span id="instructions5">If at any time a text prompt makes you uncomfortable, you don't know how to pronounce a word, or you don't want to record the prompt for any other reason, you may skip the prompt with the <button class="btn btn-primary" style="background-color: var(--color3);">Skip</button> button.</span><button class="btn btn-primary" style="background-color: var(--color3);" id="skip">Skip</button></p>
+    <p id="instructions6">You may stop recording or take a break at any time.</p>
+    <a href="{{url_for('study', study_id=study_id, lang=lang)}}" id="proceedtorecordings">Proceed to Recordings</a>
+</div>
+
+<script>
+    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+        .then (function (json){
+            document.getElementById("recordinginstructions").innerHTML = json.recordinginstructions.{{lang}}
+            document.getElementById("instructions1").innerHTML = json.instructions1.{{lang}}
+            document.getElementById("instructions2").innerHTML = json.instructions2.{{lang}}
+            document.getElementById("record").innerHTML = json.record.{{lang}}
+            document.getElementById("instructions3").innerHTML = json.instructions3.{{lang}}
+            document.getElementById("stop").innerHTML = json.stop.{{lang}}
+            document.getElementById("instructions41").innerHTML = json.instructions41.{{lang}}
+            document.getElementById("rerecord").innerHTML = json.rerecord.{{lang}}
+            document.getElementById("instructions42").innerHTML = json.instructions42.{{lang}}
+            document.getElementById("submit").innerHTML = json.submit.{{lang}}
+            document.getElementById("instructions43").innerHTML = json.instructions43.{{lang}}
+            document.getElementById("instructions5").innerHTML = json.instructions5.{{lang}}
+            document.getElementById("skip").innerHTML = json.skip.{{lang}}
+            document.getElementById("instructions6").innerHTML = json.instructions6.{{lang}}
+            document.getElementById("proceedtorecordings").innerHTML = json.proceedtorecordings.{{lang}}
+        })
+</script>
+
+{% endblock content %}

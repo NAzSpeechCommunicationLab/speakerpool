@@ -1,0 +1,242 @@
+:root {
+    --color1: #78c0e0ff;
+    --color2: #449dd1ff;
+    --color3: #150578ff;
+    --color4: #453f3cff;
+    --color5: white;
+    --font: 'Castoro', serif;
+    /* 'Roboto Condensed', sans-serif; */
+    /* 'Merriweather', serif; */
+    /* 'Josefin Sans', sans-serif; */
+  }
+
+  /* --dark-sky-blue: #78c0e0ff;
+  --carolina-blue: #449dd1ff;
+  --navy-blue: #150578ff; */
+
+  /* .container {
+    color: var(--blue);
+    background-color: var(--white);
+    padding: 15px;
+  } */
+
+.clickable {
+    cursor: pointer;
+    }
+
+.main {
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    text-align: center;
+}
+
+.instructions {
+    position: absolute;
+    padding: 5%;
+    padding-top: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+
+.prompt{
+    font-size: 3.5vh;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 20px;
+    display: flex;
+}
+
+.button-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+}
+
+.btn-primary{
+    font-size: 1.2rem;
+}
+
+.title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: var(--color2);
+    gap: 0px;
+
+}
+
+.navbar-button {
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 16px;
+    margin-left: 0px;
+    margin-right: 0px;
+    white-space: nowrap;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: flex-start;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.form-control {
+    border: 3px solid #ced4da;
+}
+
+.form-check-input {
+    border: 3px solid rgba(0,0,0,.25);
+    margin: 0.5em;
+    margin-top: 0;
+}
+
+.consentViewer {
+    display: flex;
+    height: 202vw;
+}
+
+.downloadMessage {
+  display: block;
+  text-align: center;
+  padding: 15px;
+
+}
+
+div {
+    gap: 10px
+}
+
+.a_div {
+    text-align: center;
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 0.625%;
+    line-height: 3;
+    color: white;
+    border-radius: 10px;
+    padding-left:8px;
+    padding-right:8px;
+    margin: 8px;
+    border-style: solid;
+    border-color: var(--color4);
+    font-family: var(--font);
+  }
+
+table {
+    display: inline-table;
+    border-collapse: collapse;
+}
+  
+th {
+    text-align: -webkit-center;
+}
+
+td {
+    text-align: -webkit-center;
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    border: none;
+}
+
+a:link, a:visited, a:focus {
+    background: var(--color4);
+}
+  
+a:hover {
+    background: var(--color2);
+    color: white;
+}
+  
+a:active {
+    background: var(--color1);
+    color: white;
+}
+
+#the-canvas {
+    border: 1px solid black;
+    direction: ltr;
+    margin-top: 100vw;
+  }
+
+.studiesDiv {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+
+p {
+    color: var(--color4);
+    font-family: var(--font);
+}
+
+span {
+    color: var(--color4);
+    font-family: var(--font);
+}
+
+h3 {
+    color: var(--color4);
+    font-family: var(--font);
+    font-weight: 700;
+}
+
+h4 {
+    color: var(--color4);
+    font-family: var(--font);
+    font-weight: 700;
+}
+
+h5 {
+    color: var(--color4);
+    font-family: var(--font);
+    font-weight: 700;
+}
+
+li {
+    color: var(--color4);
+    font-family: var(--font);
+}
+
+td {
+    color: var(--color4);
+    font-family: var(--font);
+}
+
+label {
+    color: var(--color4);
+    font-family: var(--font);
+}
+
+body {
+    font-size: 1.2rem;
+    /* background-image: url('waveform.jpg'); */
+    /* background-color: var(--color2); */
+}

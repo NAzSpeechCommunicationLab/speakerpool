@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="content-section" style="text-align: center;">
+    <div class="border-top pt-3">
+        <small class="text-muted" id="noaccount">
+            Don't Have an Account Yet?
+        </small>
+        <small class="text-muted">
+            <a id="createaccount" class="ml-r" href="{{url_for('register', lang=lang)}}" style="line-height: 2;">Create Account</a>
+        </small>
+    </div>
+    <form method="POST" action="">
+        {{form.hidden_tag()}}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4" id="signin2">
+                Sign In
+            </legend>
+            <div class="form-group">
+                {{form.username.label(class="form-control-label", id="usernameLabel")}}
+                {% if form.username.errors %}
+                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+
+                        <span id="username_error">{{ error }}</span>
+
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.username(class="form-control form-control-lg")}}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{form.password.label(class="form-control-label", id="passwordLabel")}}
+                {% if form.password.errors %}
+                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+
+                        <span id="password_error">{{ error }}</span>
+
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.password(class="form-control form-control-lg")}}
+                {% endif %}
+            </div>
+            <div class="form-check" style="margin-top: 8px;">
+                {{form.remember(class="form-check-input")}}
+                {{form.remember.label(class="form-check-label", id="rememberLabel")}}
+            </div>
+            <div class="form-group" style="margin-top: 15px;">
+                {{form.submit(class="btn btn-primary", style="color:white; background-color:var(--color4)", id="submit")}}
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script>
+    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+    .then (function (json){
+        document.getElementById("noaccount").innerHTML = json.noaccount.{{lang}}
+        document.getElementById("signin2").innerHTML = json.signin.{{lang}}
+        document.getElementById("createaccount").innerHTML = json.createaccount.{{lang}}
+        document.getElementById("usernameLabel").innerHTML = json.username.{{lang}}
+        document.getElementById("passwordLabel").innerHTML = json.password.{{lang}}
+        document.getElementById("rememberLabel").innerHTML = json.remember.{{lang}}
+        document.getElementById("submit").value = json.submit.{{lang}}
+    })
+    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+    .then (function (json){
+        document.getElementById("noaccount").innerHTML = json.noaccount.{{lang}}
+        document.getElementById("signin2").innerHTML = json.signin.{{lang}}
+        document.getElementById("createaccount").innerHTML = json.createaccount.{{lang}}
+        document.getElementById("usernameLabel").innerHTML = json.username.{{lang}}
+        document.getElementById("passwordLabel").innerHTML = json.password.{{lang}}
+        document.getElementById("rememberLabel").innerHTML = json.remember.{{lang}}
+        document.getElementById("submit").value = json.submit.{{lang}}
+        if (document.getElementById("username_error").innerHTML == "length error") {
+            document.getElementById("username_error").innerHTML = json.length.{{lang}}
+        }
+    })
+    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+    .then (function (json){
+        if (document.getElementById("password_error").innerHTML == "password length error") {
+            document.getElementById("password_error").innerHTML = json.length.{{lang}}
+        }
+    })
+</script>
+
+{% endblock content %}

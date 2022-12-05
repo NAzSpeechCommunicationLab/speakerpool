@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="main" style="top:60%;">
+    <h4 id="thankyou">Thank you for your participation!</h4>
+    <p id="done">You have completed all prompts for this study.</p>
+    <a href="{{url_for('home', lang=lang)}}") id="returnhome">Return Home</a>
+</div>
+
+
+<script>
+    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+        .then (function (json){
+            document.getElementById("thankyou").innerHTML = json.thankyou.{{lang}}
+            document.getElementById("done").innerHTML = json.done.{{lang}}
+            document.getElementById("returnhome").innerHTML = json.returnhome.{{lang}}
+        })
+</script>
+
+{% endblock content %}

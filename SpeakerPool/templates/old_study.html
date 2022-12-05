@@ -1,0 +1,262 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div style="margin-bottom: 40vh;display: flex;justify-content: center;">
+    <p class = "prompt" id="prompt">Welcome to Speaker Pool!</p>
+</div>
+
+<div class="main" style="top:80%;position: fixed;">
+    <audio id="audio" controls controlsList="nodownload" style="display: none;"></audio>
+    <div class="button-bar">
+        <button class="btn btn-primary" style="background-color: var(--color4);" onclick="next_prompt()" id="start">Proceed to First Recording</button>
+    </div>
+    <div class="button-bar">
+        <button class="btn btn-primary" id="recordButton" style="background-color:red; display: none;">Record Audio</button>
+        <button class="btn btn-primary" id="stopButton" style="background-color:red; display: none;">Stop Recording</button>
+    </div>
+    <div class="button-bar">
+        <button class="btn btn-primary" id="submit" onclick="submit()" style="display:none;background-color:green; display: none;">Submit</button>
+        <button class="btn btn-primary" id="skip" onclick="skip()" style="background-color: var(--color3); display: none; ">Skip</button>
+    </div>
+	<div>
+		<span id="indicator" style="background-color:var(--color2); border-radius:10px; padding:5px;display:none; color:white; "></span> 
+	</div>
+</div>
+
+<div id="formats"></div>
+<!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+  <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+</div>
+
+<script>
+
+translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+	.then (function (json){
+		document.getElementById("prompt").innerHTML = json.welcome.{{lang}}
+		if (document.getElementById("start")){
+			document.getElementById("start").innerHTML = json.start.{{lang}}
+		}
+		if (document.getElementById("recordButton")){
+			document.getElementById("recordButton").innerHTML = json.record.{{lang}}
+		}
+		if (document.getElementById("stopButton")){
+			document.getElementById("stopButton").innerHTML = json.stop.{{lang}}
+		}
+		if (document.getElementById("submit")){
+			document.getElementById("submit").innerHTML = json.submit.{{lang}}
+		}
+		if (document.getElementById("skip")){
+			document.getElementById("skip").innerHTML = json.skip.{{lang}}
+		}
+	})
+
+
+var request_url = "{{url_for('study', study_id=study_id, lang=lang)}}"
+var prompts = {{prompts|safe}}
+var prompt_idx = 0
+var prompt = prompts[prompt_idx]
+
+//webkitURL is deprecated but nevertheless
+URL = window.URL || window.webkitURL;
+
+var gumStream; 						//stream from getUserMedia()
+var rec; 							//Recorder.js object
+var input; 							//MediaStreamAudioSourceNode we'll be recording
+
+// shim for AudioContext when it's not avb. 
+var AudioContext = window.AudioContext || window.webkitAudioContext;
+var audioContext //audio context to help us record
+
+var recordButton = document.getElementById("recordButton");
+var stopButton = document.getElementById("stopButton");
+var submitButton = document.getElementById("submit");
+var skipButton = document.getElementById("skip");
+var startButton = document.getElementById("start");
+
+// clear indicator message
+function removeIndicator(){
+            var flashDurationInSeconds = 2;
+            var flashContainerId = 'indicator';
+
+            function removeFlashMessages() {
+                document.getElementById(flashContainerId).style.display = "none"
+            }
+
+            setTimeout(removeFlashMessages, flashDurationInSeconds * 1000);
+        }
+
+//add events to those 2 buttons
+recordButton.addEventListener("click", startRecording);
+stopButton.addEventListener("click", stopRecording);
+
+function next_prompt(){
+    document.getElementById('prompt').innerHTML = prompts[prompt_idx]
+	prompt_idx++
+	if (prompts[prompt_idx-1] == undefined) {
+		location.href = '{{url_for("complete", lang=lang)}}';
+	} else {
+		recordButton.disabled = false
+		submitButton.style.display = "none"
+		skipButton.disabled = false
+		skipButton.style.display = "block"
+		audio.style.display = "block"
+		recordButton.style.display = "block"
+		stopButton.style.display = "block"
+		startButton.style.display = "none"
+	}
+	document.getElementById('audio').src = ""
+  }
+
+function startRecording() {
+
+	/*
+		Simple constraints object, for more advanced audio features see
+		https://addpipe.com/blog/audio-constraints-getusermedia/
+	*/
+    
+    var constraints = { audio: true, video:false }
+
+ 	/*
+    	Disable the record button until we get a success or fail from getUserMedia() 
+	*/
+
+	recordButton.disabled = true;
+	stopButton.disabled = false;
+
+	/*
+    	We're using the standard promise based getUserMedia() 
+    	https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+	*/
+
+	navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+
+		/*
+			create an audio context after getUserMedia is called
+			sampleRate might change after getUserMedia is called, like it does on macOS when recording through AirPods
+			the sampleRate defaults to the one set in your OS for your playback device
+		*/
+		audioContext = new AudioContext();
+
+
+		/*  assign to gumStream for later use  */
+		gumStream = stream;
+		
+		/* use the stream */
+		input = audioContext.createMediaStreamSource(stream);
+
+		/* 
+			Create the Recorder object and configure to record mono sound (1 channel)
+			Recording 2 channels  will double the file size
+		*/
+		rec = new Recorder(input,{numChannels:1})
+
+		//start the recording process
+		rec.record()
+
+	}).catch(function(err) {
+	  	//enable the record button if getUserMedia() fails
+    	recordButton.disabled = false;
+    	stopButton.disabled = true;
+	});
+}
+
+function stopRecording() {
+	//disable the stop button, enable the record too allow for new recordings
+	stopButton.disabled = true;
+	recordButton.disabled = false;
+
+	translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+		.then (function (json){
+			document.getElementById("recordButton").innerHTML = json.rerecord.{{lang}}
+		})
+
+    submitButton.style.display = "block"
+
+	//tell the recorder to stop the recording
+	rec.stop();
+
+	//stop microphone access
+	gumStream.getAudioTracks()[0].stop();
+
+	//create the wav blob and pass it on to createDownloadLink
+	rec.exportWAV(updateAudioPlayer);
+
+}
+
+function skip() {
+
+	var xhr=new XMLHttpRequest();
+    var fd=new FormData();
+	fd.append("samplerate", "SKIPPED")
+	fd.append("prompt", prompts[prompt_idx-1])
+	fd.append("mic", "SKIPPED")
+    xhr.open("POST", request_url);
+    xhr.send(fd);
+
+	indicator = document.getElementById('indicator')
+
+	translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+		.then (function (json){
+			indicator.innerHTML = json.successfulskip.{{lang}}
+		})
+
+	indicator.style.display = "block"
+	removeIndicator()
+
+	next_prompt()
+}
+
+function submit() {
+	rec.exportWAV(upload_audio)
+
+	indicator = document.getElementById('indicator')
+
+	translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+		.then (function (json){
+			indicator.innerHTML = json.successfulupload.{{lang}}
+			document.getElementById("recordButton").innerHTML = json.record.{{lang}}
+		})
+
+	indicator.style.display = "block"
+	removeIndicator()
+
+	next_prompt()
+}
+
+function updateAudioPlayer(blob) {
+	
+	var url = URL.createObjectURL(blob);
+
+	//add controls to the <audio> element
+	au = document.getElementById('audio');
+
+	au.controls = true;
+	au.src = url;
+
+}
+
+var device_list = []
+var enumeratorPromise = navigator.mediaDevices.enumerateDevices()
+	.then (function (devices){
+		devices.forEach(function (item){
+			if (item.kind == "audioinput"){
+				device_list.push(item.label)
+                                console.log(item)
+			}
+		});
+	});
+
+function upload_audio(blob) {
+    var xhr=new XMLHttpRequest();
+    var fd=new FormData();
+	enumeratorPromise.then()
+    fd.append("recording", blob, "./static/temp.wav");
+	fd.append("samplerate", audioContext.sampleRate);
+	fd.append("prompt", prompts[prompt_idx-2])
+        console.log(device_list[0])
+	fd.append("mic", device_list[0])
+    xhr.open("POST", request_url);
+    xhr.send(fd);
+}
+</script>
+{% endblock content %}

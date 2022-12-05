@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div style="display: flex; flex-wrap: wrap;">
+    <div style="margin: 15px">
+        <h5 style="text-align: center;">Tyler Schnoor</h5>
+        <img src="{{url_for('static', filename='ts_profile.jpg')}}" height=160 width=125 style="display: block;margin-left: auto; margin-right: auto;">
+        <p style="text-align: center; margin-bottom: 0px;"><b>Creator of SpeakerPool</b></p>
+        <p style="text-align: center; margin-top: 0px;"><a href="mailto:tschnoor@ualberta.ca" style="line-height: 2;">tschnoor@ualberta.ca</a></p>
+    </div>
+    <div style="margin: 15px">
+        <h5 style="text-align: center;">Tyler Schnoor</h5>
+        <img src="{{url_for('static', filename='ts_profile.jpg')}}" height=160 width=125 style="display: block;margin-left: auto; margin-right: auto;">
+        <p style="text-align: center; margin-bottom: 0px;"><b>Creator of SpeakerPool</b></p>
+        <p style="text-align: center; margin-top: 0px;"><a href="mailto:tschnoor@ualberta.ca" style="line-height: 2;">tschnoor@ualberta.ca</a></p>
+    </div>
+</div>
+
+{% endblock content %}

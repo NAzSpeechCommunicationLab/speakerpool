@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h3 style="text-align: center; margin-top: 10px;" id="demosurvey">Demographic Survey</h3>
+<form id="demographic_form" action="{{url_for('datareception', study_id=study_id, lang=lang)}}" method="post" onsubmit="return validateForm()"></form>
+
+<script>
+    var demographic_fields = {{demographic_dict|safe}}
+    var html = ''
+    var question_idx = 0
+    
+    // dynamically generate form fields
+    for (var key in demographic_fields){
+        var value = demographic_fields[key];
+        if (value=="FREE"){
+            html += '<label for="'+key+'" class="form-label">'+key+'</label><br><input maxlength="300" type="text" name="'+ key +'" style="border-width:3px;"><span style="color:red; font-size:17px" name="' + key + '_error"></span><br>'
+        } else if (value=="NUMBER"){
+            html += '<label for="'+key+'" class="form-label">'+key+'</label><br><input maxlength="8" type="text" name="'+key+'" style="border-width:3px;"><span style="color:red; font-size:17px" name="' + key + '_error"></span><br>'
+        } else if (value=="CHECKBOX"){
+            html += '<label for="'+key+'" class="form-label">'+key+'</label><br><input type="checkbox" class="form-check-input" name="'+key+'" style="border:3px solid;"><br>'
+        }
+        question_idx = question_idx + 1
+    }
+    html += '<input type="submit" value="Submit" onsubmit="return validateForm()" class="btn btn-primary" style="margin-top:12px; background-color:var(--color4); " id="submit"><br>';
+    document.querySelector('#demographic_form').innerHTML = html
+
+    function validateForm() {
+
+        // ensure unchecked boxes still get posted
+        $("#demographic_form").find('input[type=checkbox]:not(:checked)').prop('checked', true).val(0);
+
+        var val_idx = 0
+        var response_form = new FormData()
+        var request_url = "{{url_for('demographic', study_id=study_id, lang=lang)}}"
+
+        for (var key in demographic_fields){
+            var value = demographic_fields[key];
+            field = document.getElementsByName(key)[0]
+            error_field = document.getElementsByName(key + "_error")[0]
+            let x = field.value
+            
+            // change "off" and "on" to 0 and 1
+            if (value=="CHECKBOX"){
+                if (x == "on"){
+                    field.value = 1
+                } else {
+                    field.value = 0
+                }
+            }
+
+            // validate text and number fields
+            if (value=="FREE"){
+                if (x == "") {
+                    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+                        .then (function (json){
+                            error_field.innerHTML = json.requiredresponse.{{lang}}
+                    })
+                    return false;
+                }
+                if (x.length > 300) {
+                    error_field.innerHTML = "Text fields have a limit of 300 characters."
+                    return false;
+                }
+
+            } else if (value=="NUMBER"){
+                if (x == "") {
+                    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+                        .then (function (json){
+                            error_field.innerHTML = json.requiredresponse.{{lang}}
+                    })
+                    return false;
+                }
+                if (isNaN(x)) {
+                    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+                        .then (function (json){
+                            error_field.innerHTML = json.number.{{lang}}
+                    })
+                    return false;
+                }
+                if (x.length > 8) {
+                    error_field.innerHTML = "This field has a limit of 5 digits."
+                    return false;
+                }
+            }
+
+            val_idx += 1
+        }
+    }
+
+    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+        .then (function (json){
+            document.getElementById("demosurvey").innerHTML = json.demosurvey.{{lang}}
+            document.getElementById("submit").value = json.submit.{{lang}}
+        })
+
+</script>
+
+{% endblock content %}

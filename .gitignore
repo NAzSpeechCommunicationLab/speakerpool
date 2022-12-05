@@ -1,0 +1,4 @@
+sp-env/**
+SpeakerPool/static/studies/**
+logs/**
+SpeakerPool/static/db/**

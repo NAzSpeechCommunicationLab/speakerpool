@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1 id="studies" style="text-align: center;"></h1>
+<div id="studiesDiv" class="studiesDiv"></div>
+
+<script>
+
+    // set text from json file
+    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+        .then (function (json){
+            document.getElementById("studies").innerHTML = json.studies.{{lang}}
+            document.getElementById("prompttype").innerHTML = json.prompttype.{{lang}}
+            document.getElementById("studystats").innerHTML = json.studystats.{{lang}}
+            document.getElementById("totaln").innerHTML = json.totaln.{{lang}}
+            document.getElementById("totallength").innerHTML = json.totallength.{{lang}}
+            document.getElementById("numparticipants").innerHTML = json.numparticipants.{{lang}}
+            document.getElementById("questions").innerHTML = json.questions.{{lang}}
+            document.getElementById("participate").innerHTML = json.participate.{{lang}}
+            if (document.getElementById("yourprogress")){
+                document.getElementById("yourprogress").innerHTML = json.yourprogress.{{lang}}
+            }
+            if (document.getElementById("signinto")){
+                document.getElementById("signinto").innerHTML = json.signinto.{{lang}}
+            }
+            if (document.getElementById("notyet")){
+                document.getElementById("notyet").innerHTML = json.notyet.{{lang}}
+            }
+            if (document.getElementById("numberofprompts")){
+                document.getElementById("numberofprompts").innerHTML = json.numberofprompts.{{lang}}
+            }
+            if (document.getElementById("stillavailable")){
+                document.getElementById("stillavailable").innerHTML = json.stillavailable.{{lang}}
+            }
+            if (document.getElementById("welldone")){
+                document.getElementById("welldone").innerHTML = json.welldone.{{lang}}
+            }
+        })
+
+    var studies_list = {{studies_list|safe}}
+    var html = '';
+
+    studies_list.forEach(function (study) {
+        html += '<div style="width:85vw; border-style:solid; margin:15px; border-color: var(--color3); border-radius: 10px; background-color:white;">'
+        html += '<h3>' + study["study_name"] + '</h3>'
+        html += '<p>' + study["participant_description"] + '</p>'
+        html += '<p><b><span id="prompttype">Prompt Type:</span></b> ' + study["text_type"] + '</p>'
+        html += '<div style="border-style:solid; margin:25px; border-color: var(--color4); border-radius: 10px; background-color:white; color:var(--color3); padding:10px; margin-top:8px; margin-bottom: 8px;">'
+        {% if current_user.is_authenticated %}
+            var remaining_prompts = parseInt(study["available"]) - parseInt(study["completed"])
+            if (study["participated"] == "True"){
+                html += '<p><b><span id="yourprogress">Your Progress:</span></b></p>'
+                if (remaining_prompts > 0){
+                    html += "<table>"
+                    html += "<tr><td style='color: var(--color3);' id='numberofprompts'>Number of prompts recorded or skipped:</td><td><b>" + study["completed"] + "</b></td></tr>"
+                    html += "<tr><td style='color: var(--color3);' id='stillavailable'>Number of prompts still available to record:</td><td><b>" + remaining_prompts + "</b></td></tr>"
+                    html += "</table>"
+                } else {
+                    html += "<p style='color:var(--color3);' id='welldone'>Well done! You've completed all prompts for this study. Thank you for your participation.</p>"
+                }
+            } else {
+                html += "<p style='color: var(--color3);' id='notyet'>You have not yet participated in this study.</p>"
+            } 
+        {% else %}
+            html += "<p style='color: var(--color3);'><a id='signinto' href='{{ url_for('login', lang=lang) }}' style='padding-right:1px; padding-left:1px; line-height:2;'>Sign in to see your progress here.</a></p>"
+        {% endif %}
+        html += '</div>'
+        html += '<h5 id="studystats">Study Statistics:</h5>'
+        html += '<table>'
+        html += '<tr><td id="numparticipants">Number of participants: </td><td><b>' + study["n_participants"] + '</b></td><tr>'
+        html += '<tr><td id="totaln">Total number of recordings: </td><td><b>' + study["n_recordings"] + '</b></td></tr>'
+        html += '<tr><td id="totallength">Total audio length (hours): </td><td><b>' + study["total_recording"] + '</b></td></tr>'
+        html += '</table>'
+        html += '<h5 id="questions">Questions which will be asked in the demographic survey of the study:</h5>'
+        html += '<ul style="text-align:center; list-style-position: inside; ">'
+        var demographic_question = study["demographic_info"]
+        study["demographic_info"].forEach(function (demographic_question){
+            html += '<li>' + demographic_question + '</li>'
+        });
+        html += '</ul>'
+        var study_id = study["id"].toString()
+        var url = '/speakerpool/consent/' + study_id + "-{{lang}}"
+        html += '<a href=' + url + ' id="participate">Participate</a>';
+        html += '</div'
+    });
+
+    document.querySelector('#studiesDiv').innerHTML = html;
+
+</script>
+
+{% endblock content %}

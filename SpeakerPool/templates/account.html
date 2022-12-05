@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="main">
+    <h3 id="accountdash">Account Dashboard</h3>
+    <a href="{{ url_for('logout', lang=lang) }}" id="signout">Sign Out</a>
+</div>
+
+<script>
+    translationPromise = $.getJSON("{{url_for('static', filename='translations.json')}}")
+        .then (function (json){
+            document.getElementById("accountdash").innerHTML = json.accountdash.{{lang}}
+            document.getElementById("signout").innerHTML = json.signout.{{lang}}
+        })
+</script>
+
+{% endblock content %}
